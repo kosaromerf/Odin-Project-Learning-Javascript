@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #035756;
+  color: #f1c40f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  margin-top: 50px;
+  margin-bottom: 100px;
+  font-size: 3rem;
+}
+
+table {
+  table-layout: fixed;
+  width: 70%;
+  border: 2px solid #f1c40f;
+  border-collapse: collapse;
+}
+
+#a {
+  border-color: #f1c40f;
+}
+
+th {
+  border-bottom: 2px solid #f1c40f;
+  border-left: 1px solid gray;
+  font-size: 20px;
+}
+
+td {
+  border-bottom: 1px solid #f1c40f;
+  border-left: 1px solid gray;
+  padding: 1%;
+  margin: 2% 0 2% 0;
+}
+
+.status.blue {
+  width: 50%;
+  margin-left: 23%;
+  background-color: blue;
+  border-radius: 50%;
+  border-color: #f1c40f;
+  color: white;
+}
+
+.status.red {
+  width: 50%;
+  margin-left: 23%;
+  background-color: red;
+  border-radius: 50%;
+  border-color: #f1c40f;
+  color: white;
+}
+td:nth-child(5) {
+  padding-left: 5%;
+}
+
+.delete {
+  width: 70%;
+  background-color: black;
+  border-radius: 50%;
+  border-color: #f1c40f;
+  color: white;
+}
+
+#add {
+  margin-top: 10%;
+  font-size: 2rem;
+  background-color: #f1c40f;
+  border: 0px;
+  border-radius: 50%;
+  padding: 1.5%;
+}
+
+#addbook {
+  display: none;
+  position: fixed;
+  top: 20%;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+.form-container {
+  max-width: 300px;
+  padding: 40px;
+  background-color: #04aa6d;
+}
+
+.form-container input[type="text"],
+.form-container input[type="number"] {
+  width: 90%;
+  padding: 15px;
+  margin: 1% 0 4% 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+.form-container input[type="text"]:focus,
+.form-container input[type="number"]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.form-container .btn {
+  background-color: #035756;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.form-container .cancel {
+  background-color: red;
+}
+
+.form-container .btn:hover,
+.open-button:hover {
+  opacity: 1;
+}
