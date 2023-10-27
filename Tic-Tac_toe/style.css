@@ -1,0 +1,63 @@
+* {
+
+    border-collapse: border-box;
+
+}
+
+.header {
+    color: red;
+    font-size: 4em;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.announcer {
+    font-size: 1.2em;
+    ;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: azure;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    width: 500px;
+    height: 500px;
+
+}
+
+.square {
+    display: flex;
+    border: 2px solid black;
+    font-family: cursive;
+    font-size: 5em;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#result {
+    font-size: 1.2em;
+    font-style: italic;
+}
+
+.commands,
+.difficulty {
+    display: flex;
+    width: 80%;
+    justify-content: center;
+}
+
+button {
+    margin: 2%;
+    height: 30px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
