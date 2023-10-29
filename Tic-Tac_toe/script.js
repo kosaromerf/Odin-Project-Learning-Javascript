@@ -1,7 +1,5 @@
 const squares = document.querySelectorAll(".square");
 
-const statusText = document.getElementById("announcer");
-
 const resultText = document.getElementById("result");
 
 const restartButton = document.getElementById("restart");
@@ -26,22 +24,28 @@ let currentPlayer = "X";
 
 let cells = ["", "", "", "", "", "", "", "", ""];
 
-let running = false;
+let running = true;
 
 startGame();
 
 function startGame() {
+  running = true;
   squares.forEach((e) => e.addEventListener("click", makeMove));
-  statusText.innerHTML = `Player ${currentPlayer} needs to move`;
-  resultText.innerHTML = "";
+  restartButton.addEventListener("click", resetGame);
+  endGame();
 }
 
 function makeMove() {
-  const squareIndex = this.getAttribute("index");
-  if (cells[squareIndex] != "") {
-    return;
+  if (running) {
+    const squareIndex = this.getAttribute("index");
+    if (cells[squareIndex] != "") {
+      return;
+    }
+    updateSquare(this, squareIndex);
+    changePlayer();
+    changeResult();
+    endGame();
   }
-  updateSquare(this, squareIndex);
 }
 
 function updateSquare(square, index) {
@@ -49,12 +53,50 @@ function updateSquare(square, index) {
   square.innerHTML = currentPlayer;
 }
 
+function changePlayer() {
+  currentPlayer == "X" ? (currentPlayer = "O") : (currentPlayer = "X");
+}
+
+function resetGame() {
+  cells = ["", "", "", "", "", "", "", "", ""];
+  squares.forEach((e) => (e.innerHTML = ""));
+  currentPlayer = "X";
+  running = true;
+  changeResult();
+  endGame();
+}
+
+function changeResult() {
+  resultText.textContent = `Player ${currentPlayer}'s move`;
+}
+
+function endGame() {
+  for (let i = 0; i < winConditions.length; i++) {
+    if (
+      cells[winConditions[i][0]] == "X" &&
+      cells[winConditions[i][1]] == "X" &&
+      cells[winConditions[i][2]] == "X"
+    ) {
+      running = false;
+      resultText.textContent = `Player X won the game`;
+      break;
+    } else if (
+      cells[winConditions[i][0]] == "O" &&
+      cells[winConditions[i][1]] == "O" &&
+      cells[winConditions[i][2]] == "O"
+    ) {
+      running = false;
+      resultText.textContent = `Player O won the game`;
+      break;
+    } else if (cells.indexOf("") == -1) {
+      running = false;
+      resultText.textContent = `Draw`;
+      break;
+    } else {
+      continue;
+    }
+  }
+}
+
 function changeDifficulty() {}
-
-function endGame() {}
-
 function changeTime() {}
-
-function changeAnnouncement() {}
-
-function changeResult() {}
