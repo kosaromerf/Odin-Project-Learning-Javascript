@@ -5,10 +5,12 @@ const resultText = document.getElementById("result");
 const restartButton = document.getElementById("restart");
 const changePlayerButton = document.getElementById("changeplayer");
 const removeTimeButton = document.getElementById("interval");
+const multiPlayers = document.getElementById("2players");
 const easyButton = document.getElementById("easy");
 const hardButton = document.getElementById("hard");
 const unbeatableButton = document.getElementById("unbeatable");
-
+let player1;
+let player2;
 const winConditions = [
   [0, 1, 2],
   [3, 4, 5],
@@ -19,14 +21,64 @@ const winConditions = [
   [0, 4, 8],
   [2, 4, 6],
 ];
+/*
 
-let currentPlayer = "X";
+new section starts here
+
+*/
+function players(name, sing) {
+  return {
+    name: name,
+    sing: sing,
+  };
+}
+
+/*
+
+new section ends here
+
+*/
+let currentPlayer = {};
 
 let cells = ["", "", "", "", "", "", "", "", ""];
 
-let running = true;
+let running = false;
+let twoPlayers = false;
+let easy = false;
+let unbeatable = false;
 
-startGame();
+choseOpponent();
+
+function getName() {
+  player1 = players(prompt("Please enter your name"), "X");
+  if (twoPlayers) {
+    player2 = players(prompt("Please enter your name"), "O");
+  } else {
+    player2 = { name: "PC", sing: "O" };
+  }
+  currentPlayer = { name: player1.name, sing: player1.sing };
+}
+
+function choseOpponent() {
+  multiPlayers.addEventListener("click", function () {
+    easy = false;
+    twoPlayers = true;
+  });
+  easyButton.addEventListener("click", function () {
+    easy = true;
+    twoPlayers = false;
+  });
+
+  multiPlayers.addEventListener("click", getName);
+  multiPlayers.addEventListener("click", startGame);
+  multiPlayers.addEventListener("click", resetGame);
+  multiPlayers.addEventListener("click", changeResult);
+
+  easyButton.addEventListener("click", getName);
+  easyButton.addEventListener("click", startGame);
+  easyButton.addEventListener("click", resetGame);
+  easyButton.addEventListener("click", changeResult);
+}
 
 function startGame() {
   running = true;
@@ -41,33 +93,50 @@ function makeMove() {
     if (cells[squareIndex] != "") {
       return;
     }
-    updateSquare(this, squareIndex);
-    changePlayer();
-    changeResult();
-    endGame();
+    if (twoPlayers) {
+      updateSquare(this, squareIndex);
+      changePlayer();
+      changeResult();
+      endGame();
+    }
+    if (easy) {
+      updateSquare(this, squareIndex);
+      endGame();
+      if (running) {
+        changePlayer();
+        pcMove();
+      }
+      endGame();
+      if (running) {
+        changePlayer();
+      }
+    }
   }
+  console.log(cells);
 }
 
 function updateSquare(square, index) {
-  cells[index] = currentPlayer;
-  square.innerHTML = currentPlayer;
+  cells[index] = currentPlayer.sing;
+  square.innerHTML = currentPlayer.sing;
 }
 
 function changePlayer() {
-  currentPlayer == "X" ? (currentPlayer = "O") : (currentPlayer = "X");
+  currentPlayer == player1
+    ? (currentPlayer = player2)
+    : (currentPlayer = player1);
 }
 
 function resetGame() {
   cells = ["", "", "", "", "", "", "", "", ""];
   squares.forEach((e) => (e.innerHTML = ""));
-  currentPlayer = "X";
+  currentPlayer = player1;
   running = true;
   changeResult();
   endGame();
 }
 
 function changeResult() {
-  resultText.textContent = `Player ${currentPlayer}'s move`;
+  resultText.textContent = `Player ${currentPlayer.name}'s move`;
 }
 
 function endGame() {
@@ -78,7 +147,7 @@ function endGame() {
       cells[winConditions[i][2]] == "X"
     ) {
       running = false;
-      resultText.textContent = `Player X won the game`;
+      resultText.textContent = `Player ${player1.name} won the game`;
       break;
     } else if (
       cells[winConditions[i][0]] == "O" &&
@@ -86,17 +155,26 @@ function endGame() {
       cells[winConditions[i][2]] == "O"
     ) {
       running = false;
-      resultText.textContent = `Player O won the game`;
-      break;
-    } else if (cells.indexOf("") == -1) {
-      running = false;
-      resultText.textContent = `Draw`;
+      resultText.textContent = `Player ${player2.name} won the game`;
       break;
     } else {
       continue;
     }
   }
+  if (cells.indexOf("") == -1 && running) {
+    running = false;
+    resultText.textContent = `Draw`;
+  }
 }
 
-function changeDifficulty() {}
+function pcMove() {
+  let posibbleMoves = cells
+    .map((e, index) => (e == "" ? (e = index) : (e = -1)))
+    .filter((e) => e != -1);
+  let randomNumber = Math.ceil(Math.random() * posibbleMoves.length) - 1;
+  updateSquare(
+    squares[posibbleMoves[randomNumber]],
+    posibbleMoves[randomNumber]
+  );
+}
 function changeTime() {}
