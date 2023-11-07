@@ -21,11 +21,9 @@ const winConditions = [
   [0, 4, 8],
   [2, 4, 6],
 ];
-/*
 
-new section starts here
+let tempConditions = [];
 
-*/
 function players(name, sing) {
   return {
     name: name,
@@ -33,11 +31,6 @@ function players(name, sing) {
   };
 }
 
-/*
-
-new section ends here
-
-*/
 let currentPlayer = {};
 
 let cells = ["", "", "", "", "", "", "", "", ""];
@@ -82,6 +75,7 @@ function choseOpponent() {
 
 function startGame() {
   running = true;
+
   squares.forEach((e) => e.addEventListener("click", makeMove));
   restartButton.addEventListener("click", resetGame);
   endGame();
@@ -104,7 +98,7 @@ function makeMove() {
       endGame();
       if (running) {
         changePlayer();
-        pcMove();
+        pcMoveEasy();
       }
       endGame();
       if (running) {
@@ -112,7 +106,6 @@ function makeMove() {
       }
     }
   }
-  console.log(cells);
 }
 
 function updateSquare(square, index) {
@@ -167,7 +160,7 @@ function endGame() {
   }
 }
 
-function pcMove() {
+function pcMoveEasy() {
   let posibbleMoves = cells
     .map((e, index) => (e == "" ? (e = index) : (e = -1)))
     .filter((e) => e != -1);
@@ -177,4 +170,5 @@ function pcMove() {
     posibbleMoves[randomNumber]
   );
 }
+
 function changeTime() {}
