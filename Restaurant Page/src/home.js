@@ -1,8 +1,8 @@
 function displayHome() {
   let homeGallery = document.createElement("div");
   homeGallery.classList.add("gallery");
-
   content.appendChild(homeGallery);
+
   let galleryContainer = document.createElement("div");
   galleryContainer.classList.add("container");
 

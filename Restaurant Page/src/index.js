@@ -1,4 +1,6 @@
 import { displayHome } from "./home.js";
+import { displayContact } from "./contact.js";
+import { displayMenu } from "./menu.js";
 
 let content = document.getElementById("content");
 let header = document.createElement("header");
@@ -28,14 +30,28 @@ blankHome.classList.add("gallery");
 content.appendChild(blankHome);
 
 homePageLink.addEventListener("click", function () {
-  if (content.contains(blankHome)) {
-    content.removeChild(blankHome);
-  }
+  const galleryElements = content.querySelectorAll(".gallery");
+  galleryElements.forEach(function (element) {
+    element.remove();
+  });
+  let homeGallery = displayHome();
+  content.appendChild(homeGallery);
+});
 
-  let existingHomeGallery = content.querySelector(".gallery");
+contactPageLink.addEventListener("click", function () {
+  const galleryElements = content.querySelectorAll(".gallery");
+  galleryElements.forEach(function (element) {
+    element.remove();
+  });
+  let contactInfo = displayContact();
+  content.appendChild(contactInfo);
+});
 
-  if (!existingHomeGallery) {
-    let homeGallery = displayHome();
-    content.appendChild(homeGallery);
-  }
+menuPageLink.addEventListener("click", function () {
+  const galleryElements = content.querySelectorAll(".gallery");
+  galleryElements.forEach(function (element) {
+    element.remove();
+  });
+  let menuItems = displayMenu();
+  content.appendChild(menuItems);
 });
