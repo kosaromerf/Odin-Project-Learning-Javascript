@@ -1,0 +1,105 @@
+* {
+    padding: 0;
+    margin: 0;
+
+}
+
+#content {
+    background-color: darkolivegreen;
+    color: bisque;
+
+}
+
+h1 {
+    font-size: 3rem;
+    text-align: center;
+    padding: 1rem
+}
+
+h4 {
+    font-size: 1rem;
+    text-align: center;
+    font-weight: lighter;
+    font-style: italic;
+    padding: 0 0 2rem 0;
+
+}
+
+button {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0 5% 0 5%;
+    background-color: darkolivegreen;
+    border: 0;
+    color: bisque
+}
+
+button:hover {
+    text-decoration: underline;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
+}
+
+
+.gallery {
+    background-image: url(img/table.jpg);
+    width: auto;
+    height: 80.2vh;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.container {
+    background-color: rgb(0, 0, 0, 0.50);
+    max-width: 50vw;
+    max-height: 70vh;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-around;
+    overflow-y: scroll;
+
+
+
+}
+
+.image {
+    width: 15vh;
+    height: 15vh;
+    margin: 2%;
+
+}
+
+
+
+
+::-webkit-scrollbar {
+    width: 5px;
+
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5);
+
+    border-radius: 5px;
+
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.8);
+
+}
+
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.2);
+
+}
