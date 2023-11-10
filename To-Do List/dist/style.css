@@ -1,0 +1,151 @@
+* {
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    box-sizing: border-box;
+
+}
+
+/*
+border: 1px solid red;
+*/
+
+body div {
+    display: flex;
+}
+
+header {
+    background-color: darkolivegreen;
+    height: 10vh;
+    width: 100vw;
+}
+
+nav {
+    background-color: wheat;
+    height: 90vh;
+    width: 25vw;
+}
+
+
+main {
+    background-color: aqua;
+    width: 75vw;
+    height: 90vh;
+}
+
+ul {
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-indent: 5%;
+    margin: 20% 0 20% 0;
+}
+
+li {
+    font-size: 1rem;
+    font-weight: lighter;
+    text-indent: 11%;
+    margin: 10% 0 10% 5%;
+}
+
+h2,
+h3 {
+    padding: 2vw;
+}
+
+
+#display {
+    width: 94%;
+    height: 5rem;
+    background-color: aliceblue;
+    margin: 3%;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#display div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#newObjective {
+    width: 94%;
+    height: 2.5rem;
+    margin: 0 3% 3% 3%;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 1fr 10fr 2fr 2fr;
+    gap: 0
+}
+
+#newObjective button {
+    min-width: 40px;
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    font-size: 2rem;
+    color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.5);
+
+}
+
+.newInput {
+
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+#newDate {
+
+    min-width: 100px;
+}
+
+#newDuration {
+    min-width: 70px;
+}
+
+#newName {
+    padding-left: 3vw;
+}
+
+li {
+    list-style: none;
+}
+
+
+table,
+tr,
+td,
+th {
+    border-bottom: 5px solid aqua;
+}
+
+table {
+    width: 94%;
+    height: 2.5rem;
+    border-radius: 10px;
+    margin: 2% 3% 3% 3%;
+    text-indent: 5%;
+
+
+}
+
+caption {
+    font-weight: bold;
+    margin-bottom: 2%
+}
+
+td {
+    background-color: white;
+    padding-left: 10px;
+}
+
+th:nth-child(1) {
+    width: 30px;
+
+}
+
+th:nth-child(3) {
+    width: 100px;
+}

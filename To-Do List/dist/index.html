@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header></header>
+    <div>
+      <nav>
+        <ul>
+          Plans
+          <li>Today</li>
+          <li>Tommorow</li>
+          <li>This week</li>
+          <li>Late</li>
+          <li>Undated</li>
+        </ul>
+        <ul>
+          Projects
+          <li>New Project</li>
+        </ul>
+      </nav>
+      <main>
+        <h2>Today</h2>
+        <div id="display">
+          <div>Time needed</div>
+          <div>Objectives Left</div>
+        </div>
+
+        <h3>Set New Objective</h3>
+        <div id="newObjective">
+          <button>+</button>
+          <input
+            type="text"
+            id="newName"
+            class="newInput"
+            placeholder="New Objective"
+            required
+          /><input type="date" id="newDate" class="newInput" /><input
+            type="time"
+            id="newDuration"
+            class="newInput"
+            value="00:40"
+          />
+        </div>
+
+        <table>
+          <caption>
+            Objectives
+          </caption>
+          <tr>
+            <th></th>
+            <th>Name</th>
+
+            <th>Duration</th>
+          </tr>
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td>objective 1</td>
+
+            <td>4hours</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td>objective 2</td>
+
+            <td>2hours</td>
+          </tr>
+        </table>
+      </main>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
