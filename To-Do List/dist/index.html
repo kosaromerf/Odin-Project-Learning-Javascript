@@ -8,20 +8,40 @@
   </head>
   <body>
     <header></header>
+    <div id="addProjectForm">
+      
+        <h1>New Project</h1>
+        <input type="text" placeholder="Project Name" id="addProjectName"  />
+        <button id="addButton">
+          Add Project
+        </button>
+        <button type="button" id="closeButton">
+          Close
+        </button>
+      
+    </div>
+
+
+    
+
     <div>
       <nav>
         <ul>
           Plans
           <li>Today</li>
           <li>Tommorow</li>
-          <li>This week</li>
+          <li>Planned</li>
           <li>Late</li>
           <li>Undated</li>
         </ul>
-        <ul>
+        <ul id="projectList">
           Projects
-          <li>New Project</li>
+          <li class="project">Select Project</li>
+          <li class="project">New Project</li>
+          <li class="project">New Project1</li>
+          <li class="project">New Project2</li>
         </ul>
+        <button id="addProject" ><b>+</b> Add Project</button>
       </nav>
       <main>
         <h2>Today</h2>
@@ -32,41 +52,47 @@
 
         <h3>Set New Objective</h3>
         <div id="newObjective">
-          <button>+</button>
+          <button id="addObjective">+</button>
           <input
             type="text"
             id="newName"
             class="newInput"
             placeholder="New Objective"
             required
-          /><input type="date" id="newDate" class="newInput" /><input
+          />
+          <select name="projects" id="projectSelector"></select>
+          <div id="priorityContainer">
+          <div id="high"><input type="radio" id="highbtn" class="priority" name="priority"></input></div>
+            <div id="normal"><input type="radio" id="normalbtn" class="priority" name="priority" checked></input></div>
+            <div id="low"><input type="radio" id="lowbtn" class="priority" name="priority"></input></div>
+          </div>
+          <input type="date" id="newDate" class="newInput" /><input
             type="time"
             id="newDuration"
             class="newInput"
-            value="00:40"
           />
         </div>
 
-        <table>
+        <table id="objTable">
           <caption>
             Objectives
           </caption>
           <tr>
             <th></th>
             <th>Name</th>
-
+            <th>Due Time</th>
             <th>Duration</th>
           </tr>
           <tr>
             <td><input type="checkbox" /></td>
             <td>objective 1</td>
-
+            <td>wednesday</td>
             <td>4hours</td>
           </tr>
           <tr>
             <td><input type="checkbox" /></td>
             <td>objective 2</td>
-
+            <td>thursday</td>
             <td>2hours</td>
           </tr>
         </table>

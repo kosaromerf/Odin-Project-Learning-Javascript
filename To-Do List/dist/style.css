@@ -3,12 +3,12 @@
     padding: 0;
     border-collapse: collapse;
     box-sizing: border-box;
-
-}
-
-/*
+    /*
 border: 1px solid red;
 */
+}
+
+
 
 body div {
     display: flex;
@@ -24,6 +24,7 @@ nav {
     background-color: wheat;
     height: 90vh;
     width: 25vw;
+    max-width: 250px;
 }
 
 
@@ -38,6 +39,7 @@ ul {
     font-weight: bold;
     text-indent: 5%;
     margin: 20% 0 20% 0;
+
 }
 
 li {
@@ -75,9 +77,8 @@ h3 {
     height: 2.5rem;
     margin: 0 3% 3% 3%;
     border-radius: 10px;
-    display: grid;
-    grid-template-columns: 1fr 10fr 2fr 2fr;
-    gap: 0
+    display: flex;
+
 }
 
 #newObjective button {
@@ -92,17 +93,24 @@ h3 {
 }
 
 .newInput {
-
     border: 1px solid rgba(0, 0, 0, 0.5);
+    flex-grow: 1;
 }
 
 #newDate {
+    max-width: 20px;
+}
 
-    min-width: 100px;
+#newDate::-webkit-datetime-edit {
+    display: none;
+}
+
+#newDuration::-webkit-datetime-edit {
+    display: none;
 }
 
 #newDuration {
-    min-width: 70px;
+    max-width: 30px;
 }
 
 #newName {
@@ -148,4 +156,118 @@ th:nth-child(1) {
 
 th:nth-child(3) {
     width: 100px;
+}
+
+th:nth-child(4) {
+    width: 100px;
+}
+
+td:nth-child(3),
+td:nth-child(4) {
+    width: 100px;
+    text-align: end;
+}
+
+#priorityContainer {
+    width: 13px;
+    display: flex;
+    flex-direction: column;
+}
+
+#high {
+    background-color: red;
+
+    height: 33.3%;
+
+}
+
+#normal {
+    background-color: yellow;
+
+    height: 33.4%;
+}
+
+#low {
+    background-color: green;
+
+    height: 33.3%;
+}
+
+input[type='radio'] {
+    transform: scale(0.65);
+}
+
+#projectSelector {
+    width: 10vw;
+    min-width: 107px
+}
+
+#addProject {
+    margin: 0% 0% 5% 16%;
+    background-color: wheat;
+    border: 0;
+    font-size: 1.2rem;
+}
+
+
+
+#addProject:hover,
+#addObjective:hover,
+#projectSelector:hover,
+input[type="radio"],
+#newDate:hover,
+#newDuration:hover,
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+
+
+#addProject b {
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+#addProjectForm {
+    display: none;
+    position: fixed;
+    top: 20%;
+    left: 35%;
+    border: 3px solid #f1f1f1;
+    z-index: -1;
+    background-color: darkolivegreen;
+    color: white;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    max-width: 300px;
+    height: 30%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3%;
+    border-radius: 40px;
+}
+
+#addProjectForm button,
+#addProjectForm input {
+    width: 80%;
+    height: 2rem;
+    border-radius: 15px;
+    border: 0;
+    color: white;
+
+}
+
+#addButton {
+    background-color: darkblue;
+}
+
+#closeButton {
+    background-color: red;
+}
+
+#addProjectForm input {
+    text-indent: 10px;
+    color: black
 }
