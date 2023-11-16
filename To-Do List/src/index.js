@@ -43,6 +43,8 @@ let projectList = document.getElementById("projectList");
 
 let projects = document.querySelectorAll(".project");
 
+let display = document.getElementById("mainDisplay");
+
 for (let project of projects) {
   let option = document.createElement("option");
 
@@ -116,6 +118,7 @@ addItem.addEventListener("click", function () {
   console.log(a);
 
   displayChangesByProject();
+  adjustDisplays();
 });
 
 function openForm() {
@@ -203,6 +206,8 @@ function displayChangesByDate() {
       } else {
         e.classList.remove("hidden");
       }
+      adjustDisplays();
+      display.innerText = "Today";
     });
   });
 
@@ -214,6 +219,8 @@ function displayChangesByDate() {
       } else {
         e.classList.remove("hidden");
       }
+      adjustDisplays();
+      display.innerText = "Tomorrow";
     });
   });
 
@@ -225,6 +232,8 @@ function displayChangesByDate() {
       } else {
         e.classList.remove("hidden");
       }
+      adjustDisplays();
+      display.innerText = "Planned";
     });
   });
   late.addEventListener("click", function () {
@@ -235,6 +244,8 @@ function displayChangesByDate() {
       } else {
         e.classList.remove("hidden");
       }
+      adjustDisplays();
+      display.innerText = "Late";
     });
   });
   undated.addEventListener("click", function () {
@@ -245,12 +256,16 @@ function displayChangesByDate() {
       } else {
         e.classList.remove("hidden");
       }
+      adjustDisplays();
+      display.innerText = "Undated";
     });
   });
 
   showAll.addEventListener("click", function () {
     timeGroups = document.querySelectorAll(".objectives");
     timeGroups.forEach((e) => e.classList.remove("hidden"));
+    adjustDisplays();
+    display.innerText = "All Time";
   });
 }
 
@@ -270,9 +285,34 @@ function displayChangesByProject() {
         } else {
           f.classList.remove("hidden");
         }
+        adjustDisplays();
+        display.innerText = e.innerText;
       });
     });
   });
 }
 
 displayChangesByDate();
+
+//----------------------------------
+function adjustDisplays() {
+  let visibleProjects = document.querySelectorAll(".objectives:not(.hidden)");
+  let objectiveDisplay = document.getElementById("objectiveDisplay");
+
+  objectiveDisplay.innerHTML = `${visibleProjects.length} projects`;
+
+  let tot = 0;
+  let firstDisplay = visibleProjects.forEach((e) => {
+    let lastChild = e.lastElementChild;
+    if (lastChild.innerText) {
+      let splitTime = lastChild.innerText.split(":");
+      let totalMinutes = 60 * Number(splitTime[0]) + Number(splitTime[1]);
+      tot += totalMinutes;
+    }
+  });
+
+  let timeDisplay = document.getElementById("timeDisplay");
+  timeDisplay.innerText = `${Math.floor(tot / 60)}h${tot % 60}min`;
+}
+
+adjustDisplays();
