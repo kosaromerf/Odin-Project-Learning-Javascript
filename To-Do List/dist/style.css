@@ -193,9 +193,7 @@ td:nth-child(4) {
     height: 33.3%;
 }
 
-input[type='radio'] {
-    transform: scale(0.65);
-}
+
 
 #projectSelector {
     width: 10vw;
@@ -213,14 +211,27 @@ input[type='radio'] {
 
 #addProject:hover,
 #addObjective:hover,
-#projectSelector:hover,
-input[type="radio"],
+
 #newDate:hover,
 #newDuration:hover,
-input[type="checkbox"] {
+input[type="checkbox"],
+.timeGroups:hover,
+.projectGroups:hover,
+#all:hover {
     cursor: pointer;
+    transform: scale(1.1);
+
 }
 
+#projectSelector:hover {
+    cursor: pointer;
+
+}
+
+input[type='radio'] {
+    transform: scale(0.65);
+    cursor: pointer;
+}
 
 
 #addProject b {
@@ -240,8 +251,9 @@ input[type="checkbox"] {
     border: 0;
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 40%;
     max-width: 300px;
+    min-width: 240px;
     height: 30%;
     justify-content: space-between;
     align-items: center;
@@ -270,4 +282,19 @@ input[type="checkbox"] {
 #addProjectForm input {
     text-indent: 10px;
     color: black
+}
+
+.timeGroups,
+.projectGroups {
+    background-color: transparent;
+    border: 0
+}
+
+.hidden {
+    display: none;
+}
+
+#all {
+    font-size: 0.7rem;
+    color: cadetblue;
 }

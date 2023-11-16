@@ -64,6 +64,7 @@ addItem.addEventListener("click", function () {
 
   objectives.push(objective);
   let a = document.createElement("tr");
+  a.classList.add("objectives");
   let b1 = document.createElement("td");
   let c = document.createElement("input");
   a.appendChild(b1);
@@ -108,11 +109,13 @@ addItem.addEventListener("click", function () {
       b4.style = "color:red";
       break;
   }
-  a.setAttribute("projectGroup", projectSelect.value.replaceAll(" ", "_"));
+  a.classList.add(projectSelect.value.replaceAll(" ", "_"));
 
-  a.setAttribute("dateGroup", adjustTime());
+  a.classList.add(adjustTime());
 
   console.log(a);
+
+  displayChangesByProject();
 });
 
 function openForm() {
@@ -133,9 +136,13 @@ function addProject() {
   let newProjectName = document.getElementById("addProjectName");
   let newProjectItem = document.createElement("li");
   newProjectItem.classList.add("project");
+  let projectChanger = document.createElement("button");
+  projectChanger.classList.add("projectGroups");
 
-  newProjectItem.innerText = newProjectName.value;
+  projectChanger.innerText = newProjectName.value;
+
   projectList.appendChild(newProjectItem);
+  newProjectItem.appendChild(projectChanger);
 
   let option = document.createElement("option");
   option.innerText = newProjectName.value;
@@ -176,3 +183,96 @@ function adjustTime() {
     }
   }
 }
+
+function displayChangesByDate() {
+  let today = document.getElementById("today");
+  let tomorrow = document.getElementById("tomorrow");
+  let planned = document.getElementById("planned");
+  let late = document.getElementById("late");
+  let undated = document.getElementById("undated");
+  let showAll = document.getElementById("all");
+
+  let timeGroups;
+
+  today.addEventListener("click", function () {
+    timeGroups = document.querySelectorAll(".objectives");
+
+    timeGroups.forEach((e) => {
+      if (!e.classList.contains("today")) {
+        e.classList.add("hidden");
+      } else {
+        e.classList.remove("hidden");
+      }
+    });
+  });
+
+  tomorrow.addEventListener("click", function () {
+    timeGroups = document.querySelectorAll(".objectives");
+    timeGroups.forEach((e) => {
+      if (!e.classList.contains("tomorrow")) {
+        e.classList.add("hidden");
+      } else {
+        e.classList.remove("hidden");
+      }
+    });
+  });
+
+  planned.addEventListener("click", function () {
+    timeGroups = document.querySelectorAll(".objectives");
+    timeGroups.forEach((e) => {
+      if (!e.classList.contains("planned")) {
+        e.classList.add("hidden");
+      } else {
+        e.classList.remove("hidden");
+      }
+    });
+  });
+  late.addEventListener("click", function () {
+    timeGroups = document.querySelectorAll(".objectives");
+    timeGroups.forEach((e) => {
+      if (!e.classList.contains("late")) {
+        e.classList.add("hidden");
+      } else {
+        e.classList.remove("hidden");
+      }
+    });
+  });
+  undated.addEventListener("click", function () {
+    timeGroups = document.querySelectorAll(".objectives");
+    timeGroups.forEach((e) => {
+      if (!e.classList.contains("undated")) {
+        e.classList.add("hidden");
+      } else {
+        e.classList.remove("hidden");
+      }
+    });
+  });
+
+  showAll.addEventListener("click", function () {
+    timeGroups = document.querySelectorAll(".objectives");
+    timeGroups.forEach((e) => e.classList.remove("hidden"));
+  });
+}
+
+displayChangesByDate();
+
+//---------------------------------
+
+function displayChangesByProject() {
+  let projectGroups = document.querySelectorAll(".projectGroups");
+
+  projectGroups.forEach((e) => {
+    e.addEventListener("click", function () {
+      let pGroups = document.querySelectorAll(".objectives");
+      pGroups.forEach((f) => {
+        if (!f.classList.contains(`${e.innerText.replaceAll(" ", "_")}`)) {
+          f.classList.add("hidden");
+        } else {
+          f.classList.remove("hidden");
+        }
+      });
+    });
+  });
+}
+
+displayChangesByDate();
