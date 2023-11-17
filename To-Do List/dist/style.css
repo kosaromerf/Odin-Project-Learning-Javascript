@@ -352,3 +352,7 @@ textarea {
     color: aliceblue;
     font-weight: bold;
 }
+
+.finished {
+    text-decoration: line-through
+}

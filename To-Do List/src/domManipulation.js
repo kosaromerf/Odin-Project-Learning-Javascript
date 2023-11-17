@@ -14,7 +14,7 @@ function addItem() {
     document.getElementById("newDuration").value,
     "unselected",
     "notes",
-    "checklist*"
+    "checklist"
   );
   // adding new oject to array
 
@@ -84,10 +84,14 @@ function addItem() {
       durationDisplay.style = "color:red";
       break;
   }
+
+  checkboxCotainer.addEventListener("click", function () {
+    checkFinished(checkbox, nameDisplay, dueDateDisplay, durationDisplay);
+  });
   displayChangesByDate();
   displayChangesByProject();
   adjustDisplays();
-  mainBody.addEventListener("click", function () {
+  nameDisplay.addEventListener("click", function () {
     openNotesSection(objective, mainBody);
   });
 } //---------------------------------------------------------------------------------------
@@ -132,6 +136,18 @@ function openNotesSection(objective, mainBody) {
   close.addEventListener("click", function () {
     notesBody.style.display = "none";
   });
+}
+
+function checkFinished(checkbox, nameDisplay, dueDateDisplay, durationDisplay) {
+  if (checkbox.checked) {
+    nameDisplay.classList.add("finished");
+    dueDateDisplay.classList.add("finished");
+    durationDisplay.classList.add("finished");
+  } else {
+    nameDisplay.classList.remove("finished");
+    dueDateDisplay.classList.remove("finished");
+    durationDisplay.classList.remove("finished");
+  }
 }
 
 export { addItem, objectives };
