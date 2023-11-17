@@ -33,3 +33,5 @@ document
 
 // main logic of creating objects and adding to display
 document.getElementById("addObjective").addEventListener("click", addItem);
+//add notes when click on the objective main body-----------------------------------------------------
+// document.querySelectorAll(".objectives").forEach((e) => e.addEventListener("click", a));

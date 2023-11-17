@@ -13,7 +13,7 @@ function addItem() {
     document.getElementById("newDate").value,
     document.getElementById("newDuration").value,
     "unselected",
-    "notes*",
+    "notes",
     "checklist*"
   );
   // adding new oject to array
@@ -84,10 +84,54 @@ function addItem() {
       durationDisplay.style = "color:red";
       break;
   }
-
   displayChangesByDate();
   displayChangesByProject();
   adjustDisplays();
+  mainBody.addEventListener("click", function () {
+    openNotesSection(objective, mainBody);
+  });
+} //---------------------------------------------------------------------------------------
+
+function openNotesSection(objective, mainBody) {
+  let notesBody = document.createElement("div");
+  notesBody.classList.add("notes");
+  let notes = document.createElement("h4");
+  notes.innerText = "Additinal Notes";
+  let noteInput = document.createElement("textarea");
+  noteInput.value = objective.notes;
+  let buttons = document.createElement("div");
+  buttons.setAttribute("id", "buttons");
+  let update = document.createElement("button");
+  update.setAttribute("id", "update");
+  update.innerText = "Update";
+  let del = document.createElement("button");
+  del.setAttribute("id", "del");
+  del.innerText = "Delete";
+  let close = document.createElement("button");
+  close.setAttribute("id", "close");
+  close.innerText = "Close";
+  notesBody.appendChild(notes);
+  notesBody.appendChild(noteInput);
+  notesBody.appendChild(buttons);
+  buttons.appendChild(update);
+  buttons.appendChild(close);
+  buttons.appendChild(del);
+
+  document.getElementById("body").appendChild(notesBody);
+  update.addEventListener("click", function () {
+    objective.notes = noteInput.value;
+  });
+  del.addEventListener("click", function () {
+    objectives = objectives.filter((e) => e !== objective);
+    mainBody.remove();
+    adjustDisplays();
+    console.log(objective);
+    console.log(mainBody);
+  }); //--------------------------------------------------------------------
+
+  close.addEventListener("click", function () {
+    notesBody.style.display = "none";
+  });
 }
 
 export { addItem, objectives };

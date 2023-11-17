@@ -29,7 +29,7 @@ function adjustTime() {
       return "undated";
     }
   }
-} //---------------------------------------------------------------------------------------------
+}
 
 function displayChangesByDate() {
   document.querySelectorAll(".timeGroups").forEach((e) =>
