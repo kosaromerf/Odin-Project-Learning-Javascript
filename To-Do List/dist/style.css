@@ -297,4 +297,6 @@ input[type='radio'] {
 #all {
     font-size: 0.7rem;
     color: cadetblue;
+    background-color: transparent;
+    border: 0
 }
