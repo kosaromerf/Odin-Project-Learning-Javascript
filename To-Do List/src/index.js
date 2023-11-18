@@ -7,7 +7,7 @@ import {
 } from "./projectManagement";
 import { adjustTime, displayChangesByDate } from "./dateCategorizing";
 import { adjustDisplays } from "./mainDisplay";
-import { objectives, addItem } from "./domManipulation";
+import { objectives, addItem, createItem } from "./domManipulation";
 
 //dont know where to put it while refactoring i will consider it
 
@@ -32,6 +32,22 @@ document
   .forEach((e) => e.addEventListener("click", adjustDisplays));
 
 // main logic of creating objects and adding to display
-document.getElementById("addObjective").addEventListener("click", addItem);
+document.getElementById("addObjective").addEventListener("click", function () {
+  addItem(createItem());
+
+  localStorage.setItem("objectives", JSON.stringify(objectives));
+});
 //add notes when click on the objective main body-----------------------------------------------------
 // document.querySelectorAll(".objectives").forEach((e) => e.addEventListener("click", a));
+
+let storedObjectives = localStorage.getItem("objectives");
+
+if (storedObjectives) {
+  // If objectives are found in localStorage, parse and assign them to objectives array
+  objectives = JSON.parse(storedObjectives);
+
+  // Loop through parsed objectives and add them to the display
+  objectives.forEach((e) => {
+    addItem(e); // Assuming e is a valid object for addItem function
+  });
+}

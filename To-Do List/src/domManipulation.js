@@ -6,22 +6,26 @@ import { displayChangesByProject } from "./projectManagement";
 // array of created objective objects
 let objectives = [];
 
-function addItem() {
+function createItem() {
   let objective = createObjective(
     document.getElementById("newName").value,
     document.getElementById("projectSelector").value,
     document.getElementById("newDate").value,
     document.getElementById("newDuration").value,
-    "unselected",
+    document.querySelector('input[name="priority"]:checked').id.slice(0, -3),
     "notes",
-    "checklist"
+    false
   );
+
+  return objective;
+}
+
+function addItem(objective) {
   // adding new oject to array
-
-  objectives.push(objective);
-
+  if (!objectives.includes(objective)) {
+    objectives.push(objective);
+  }
   // creating DOM elements
-
   let mainBody = document.createElement("tr");
   let checkboxCotainer = document.createElement("td");
   let checkbox = document.createElement("input");
@@ -33,6 +37,7 @@ function addItem() {
   mainBody.appendChild(checkboxCotainer);
   checkboxCotainer.appendChild(checkbox);
   checkbox.setAttribute("type", "checkbox");
+  checkbox.checked = objective.checklist;
   mainBody.appendChild(nameDisplay);
   mainBody.appendChild(dueDateDisplay);
   mainBody.appendChild(durationDisplay);
@@ -62,11 +67,6 @@ function addItem() {
   nameDisplay.innerText = objective.title;
   durationDisplay.innerText = objective.duration;
 
-  document.querySelectorAll(".priority").forEach((e) => {
-    if (e.checked) {
-      objective.priority = e.id.slice(0, -3);
-    }
-  });
   switch (objective.priority) {
     case "low":
       nameDisplay.style = "color:green";
@@ -85,8 +85,17 @@ function addItem() {
       break;
   }
 
+  checkbox.checked = objective.checklist;
+  checkFinished(checkbox, nameDisplay, dueDateDisplay, durationDisplay);
   checkboxCotainer.addEventListener("click", function () {
     checkFinished(checkbox, nameDisplay, dueDateDisplay, durationDisplay);
+    if (objective.checklist) {
+      objective.checklist = false;
+    } else {
+      objective.checklist = true;
+    }
+
+    localStorage.setItem("objectives", JSON.stringify(objectives));
   });
   displayChangesByDate();
   displayChangesByProject();
@@ -124,13 +133,13 @@ function openNotesSection(objective, mainBody) {
   document.getElementById("body").appendChild(notesBody);
   update.addEventListener("click", function () {
     objective.notes = noteInput.value;
+    localStorage.setItem("objectives", JSON.stringify(objectives));
   });
   del.addEventListener("click", function () {
     objectives = objectives.filter((e) => e !== objective);
     mainBody.remove();
+    localStorage.setItem("objectives", JSON.stringify(objectives));
     adjustDisplays();
-    console.log(objective);
-    console.log(mainBody);
   }); //--------------------------------------------------------------------
 
   close.addEventListener("click", function () {
@@ -150,4 +159,4 @@ function checkFinished(checkbox, nameDisplay, dueDateDisplay, durationDisplay) {
   }
 }
 
-export { addItem, objectives };
+export { addItem, objectives, createItem };
