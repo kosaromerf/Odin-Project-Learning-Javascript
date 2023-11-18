@@ -4,6 +4,8 @@ import {
   closeForm,
   addProject,
   displayChangesByProject,
+  projects,
+  getNewProjectName,
 } from "./projectManagement";
 import { adjustTime, displayChangesByDate } from "./dateCategorizing";
 import { adjustDisplays } from "./mainDisplay";
@@ -25,7 +27,9 @@ adjustDisplays();
 document.getElementById("addProject").addEventListener("click", openForm);
 document.getElementById("closeButton").addEventListener("click", closeForm);
 // adding a new project
-document.getElementById("addButton").addEventListener("click", addProject);
+document.getElementById("addButton").addEventListener("click", function () {
+  addProject(getNewProjectName());
+});
 // adjusting the main display when a category is selected
 document
   .querySelectorAll(".categoryBtn")
@@ -34,20 +38,26 @@ document
 // main logic of creating objects and adding to display
 document.getElementById("addObjective").addEventListener("click", function () {
   addItem(createItem());
-
+  localStorage.setItem("projects", JSON.stringify(projects));
   localStorage.setItem("objectives", JSON.stringify(objectives));
 });
 //add notes when click on the objective main body-----------------------------------------------------
-// document.querySelectorAll(".objectives").forEach((e) => e.addEventListener("click", a));
-
+let storedProjects = localStorage.getItem("projects");
 let storedObjectives = localStorage.getItem("objectives");
 
+if (storedProjects) {
+  projects = JSON.parse(storedProjects);
+
+  projects.forEach((e) => {
+    addProject(e);
+  });
+  displayChangesByProject();
+}
+
 if (storedObjectives) {
-  // If objectives are found in localStorage, parse and assign them to objectives array
   objectives = JSON.parse(storedObjectives);
 
-  // Loop through parsed objectives and add them to the display
   objectives.forEach((e) => {
-    addItem(e); // Assuming e is a valid object for addItem function
+    addItem(e);
   });
 }

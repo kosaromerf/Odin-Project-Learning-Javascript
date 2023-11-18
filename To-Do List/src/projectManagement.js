@@ -5,25 +5,31 @@ function openForm() {
 function closeForm() {
   document.getElementById("addProjectForm").style.zIndex = "-1";
 }
+let projects = [];
 
-function addProject() {
-  let newProjectName = document.getElementById("addProjectName");
+function getNewProjectName() {
+  return document.getElementById("addProjectName").value;
+}
+
+function addProject(projectName) {
+  if (!projects.includes(projectName)) {
+    projects.push(projectName);
+  }
 
   let newProjectItem = document.createElement("li");
   newProjectItem.classList.add("project");
 
   let projectChanger = document.createElement("button");
   projectChanger.classList.add("projectGroups");
-  projectChanger.innerText = newProjectName.value;
+  projectChanger.innerText = projectName;
 
   document.getElementById("projectList").appendChild(newProjectItem);
 
   newProjectItem.appendChild(projectChanger);
-
+  localStorage.setItem("projects", JSON.stringify(projects));
   let option = document.createElement("option");
-  option.innerText = newProjectName.value;
+  option.innerText = projectName;
   document.getElementById("projectSelector").appendChild(option);
-  newProjectName.value = "";
 } //-----------------------------------------------------------------------------------------
 
 function displayChangesByProject() {
@@ -41,4 +47,11 @@ function displayChangesByProject() {
     });
   });
 }
-export { openForm, closeForm, addProject, displayChangesByProject };
+export {
+  openForm,
+  closeForm,
+  addProject,
+  displayChangesByProject,
+  projects,
+  getNewProjectName,
+};

@@ -21,10 +21,6 @@ function createItem() {
 }
 
 function addItem(objective) {
-  // adding new oject to array
-  if (!objectives.includes(objective)) {
-    objectives.push(objective);
-  }
   // creating DOM elements
   let mainBody = document.createElement("tr");
   let checkboxCotainer = document.createElement("td");
@@ -46,6 +42,17 @@ function addItem(objective) {
   // adding classes to main body element
 
   mainBody.classList.add("objectives");
+
+  // adding new oject to array
+  if (!objectives.includes(objective)) {
+    objectives.push(objective);
+    mainBody.classList.add(
+      document.getElementById("projectSelector").value.replaceAll(" ", "_")
+    );
+  } else {
+    mainBody.classList.add(objective.project.replaceAll(" ", "_"));
+  }
+
   mainBody.classList.add(
     document.getElementById("projectSelector").value.replaceAll(" ", "_")
   );
@@ -86,14 +93,28 @@ function addItem(objective) {
   }
 
   checkbox.checked = objective.checklist;
-  checkFinished(checkbox, nameDisplay, dueDateDisplay, durationDisplay);
+  checkFinished(
+    mainBody,
+    checkbox,
+    nameDisplay,
+    dueDateDisplay,
+    durationDisplay
+  );
+  adjustDisplays();
   checkboxCotainer.addEventListener("click", function () {
-    checkFinished(checkbox, nameDisplay, dueDateDisplay, durationDisplay);
+    checkFinished(
+      mainBody,
+      checkbox,
+      nameDisplay,
+      dueDateDisplay,
+      durationDisplay
+    );
     if (objective.checklist) {
       objective.checklist = false;
     } else {
       objective.checklist = true;
     }
+    adjustDisplays();
 
     localStorage.setItem("objectives", JSON.stringify(objectives));
   });
@@ -138,6 +159,7 @@ function openNotesSection(objective, mainBody) {
   del.addEventListener("click", function () {
     objectives = objectives.filter((e) => e !== objective);
     mainBody.remove();
+    notesBody.style.display = "none";
     localStorage.setItem("objectives", JSON.stringify(objectives));
     adjustDisplays();
   }); //--------------------------------------------------------------------
@@ -147,16 +169,25 @@ function openNotesSection(objective, mainBody) {
   });
 }
 
-function checkFinished(checkbox, nameDisplay, dueDateDisplay, durationDisplay) {
+function checkFinished(
+  mainBody,
+  checkbox,
+  nameDisplay,
+  dueDateDisplay,
+  durationDisplay
+) {
   if (checkbox.checked) {
+    mainBody.classList.add("finished");
     nameDisplay.classList.add("finished");
     dueDateDisplay.classList.add("finished");
     durationDisplay.classList.add("finished");
   } else {
+    mainBody.classList.remove("finished");
     nameDisplay.classList.remove("finished");
     dueDateDisplay.classList.remove("finished");
     durationDisplay.classList.remove("finished");
   }
+  adjustDisplays();
 }
 
 export { addItem, objectives, createItem };
