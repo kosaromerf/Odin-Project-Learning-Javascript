@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wheater App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 id="city">Ankara</h1>
+    <button id="unitSelection">Metric/°C</button>
+    <h4 id="localTime">06:30 AM</h4>
+    <p id="lastUpdate">06:00 AM</p>
+
+    <div id="current">
+      <div>
+        <div id="temp">15C</div>
+        <div id="feeling"></div>
+        <div id="infoText"></div>
+        <img href="" src="" alt="" id="infoImg" />
+      </div>
+      <div>
+        <div id="humidity"></div>
+        <div id="pressure"></div>
+        <div id="wind"></div>
+        <div id="visibility"></div>
+      </div>
+    </div>
+
+    <div id="forecast">
+      <div>
+        <div id="date"></div>
+        <img href="" src="" alt="" />
+        <div id="avgTemp"></div>
+        <div id="maxTemp"></div>
+        <div id="minTemp"></div>
+        <div id="rain"></div>
+        <div id="snow"></div>
+      </div>
+    </div>
+
+    <input type="text" id="locationInput" />
+    <button id="getData">Get</button>
+    <script src="main.js"></script>
+  </body>
+</html>
